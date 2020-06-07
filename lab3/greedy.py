@@ -1,0 +1,9 @@
+from heapq import heappush, heappop
+INF = int(1e18) h = [] for i in range(0, 200):     h.append(0) h[ord('i')], h[ord('b')], h[ord('e')], h[ord('a')] = 80, 42, 20, 55 h[ord('c')], h[ord('d')], h[ord('f')], h[ord('g')] = 34, 25, 17, 0 
+ adj = [[] for _ in range(200)] adj[ord('i')].append((ord('a'), 35)), adj[ord('a')].append((ord('i'), 35)) adj[ord('i')].append((ord('b'), 45)), adj[ord('b')].append((ord('i'), 45)) adj[ord('c')].append((ord('a'), 22)), adj[ord('a')].append((ord('c'), 22)) adj[ord('c')].append((ord('g'), 47)), adj[ord('g')].append((ord('c'), 47)) adj[ord('g')].append((ord('e'), 26)), adj[ord('e')].append((ord('g'), 26)) adj[ord('e')].append((ord('b'), 36)), adj[ord('b')].append((ord('e'), 36)) adj[ord('f')].append((ord('b'), 27)), adj[ord('b')].append((ord('f'), 27)) adj[ord('d')].append((ord('g'), 30)), adj[ord('g')].append((ord('d'), 30)) adj[ord('d')].append((ord('a'), 32)), adj[ord('a')].append((ord('d'), 32)) adj[ord('d')].append((ord('b'), 28)), adj[ord('b')].append((ord('d'), 28)) adj[ord('d')].append((ord('c'), 31)), adj[ord('c')].append((ord('d'), 31)) par = [-1] * 200 def trace(par, dest):  path = []  while dest != -1:   path.append(dest)   dest = par[dest]  path.reverse()  for v in path:   print(chr(v), end = " ") 
+ def greedy_bfs(start, finish):     pq = [(0, 0, start)]     dist = [INF] * 200     dist[start] = 0     vis = []     vis.append(start)     while len(pq) > 0:         d, hf, u = heappop(pq)         if finish == u:             print("Path: ", end = ' ')             trace(par, finish) 
+            print()             return dist[u]         for edge in adj[u]:             w, v = edge[1], edge[0]             if v not in vis:                 dist[v] = dist[u] + w                 par[v] = u                 vis.append(v)                 heappush(pq, (h[v], dist[v], v))     return INF 
+ 
+ 
+ 
+Filename: gbfs_fcall.py import gbfs as gbfs def display_file_lines(fn, ln):   
